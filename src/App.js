@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+const App = () => {
+  const [posts, setPosts] = useState([1, 2, 3]);
+
+  function onNormalTest() {
+    setPosts([]);
+    setPosts([...posts, ...[4, 5, 6]]);
   }
-}
+
+  function onSpecialTest() {
+    setPosts([]);
+    setPosts(oldPost => [...oldPost, ...[4, 5, 6]]);
+  }
+
+  return (
+    <div>
+      <button onClick={onNormalTest}>TEST NORMAL SET</button>
+      <button onClick={onSpecialTest}>TEST SPECIAL SET</button>
+      <span>{posts}</span>
+    </div>
+  );
+};
 
 export default App;
